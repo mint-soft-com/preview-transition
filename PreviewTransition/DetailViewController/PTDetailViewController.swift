@@ -39,12 +39,18 @@ extension  PTDetailViewController {
   public override func viewDidLoad() {
     super.viewDidLoad()
     
+    
+    
+    
     backgroundImageView = createBackgroundImage(bgImage)
     view.backgroundColor = .blackColor()
     
+    
     if let titleText = self.titleText {
       title = titleText
+        
     }
+
     
     // hack 
     if let navigationController = self.navigationController {
@@ -52,6 +58,12 @@ extension  PTDetailViewController {
         label.hidden = true
       }
     }
+    
+    self.navigationController?.navigationBar.titleTextAttributes = [
+        NSForegroundColorAttributeName : UIColor.whiteColor(),
+        NSFontAttributeName : UIFont.systemFontOfSize(17)
+    ]
+    
     
     createNavBar(UIColor(red: 0, green: 0, blue: 0, alpha: 0.5))
   }
@@ -116,6 +128,7 @@ extension PTDetailViewController {
   private func createNavBar(color: UIColor) -> UIView {
     let navBar = UIView(frame: CGRect.zero)
     navBar.backgroundColor = color
+    
     navBar.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(navBar)
     

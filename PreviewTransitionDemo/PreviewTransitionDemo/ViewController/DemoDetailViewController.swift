@@ -47,14 +47,29 @@ extension DemoDetailViewController {
   public override func viewDidLoad() {
     super.viewDidLoad()
     
+
+    
+    
+    //self.navigationController?.navigationBar.barTintColor =  UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+      //  self.navigationController?.navigationBar.shadowImage = UIImage()
+    self.navigationController?.navigationBar.translucent =  true
+//    self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+//self.navigationController?.navigationBar.barTintColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+//    self.navigationController?.navigationBar.alpha = 0.5
+    
+    self.navigationController?.setNavigationBarHidden(false, animated: true)
+    
+    
     backButton = createBackButton()
     createNavigationBarBackItem(backButton)
     
-    // animations
-    showBackButtonDuration(0.3)
-    showControlViewDuration(0.3)
     
-    createBlurView()
+//    // animations
+//    showBackButtonDuration(0.3)
+//    showControlViewDuration(0.3)
+//    
+//    createBlurView()
   }
 }
 
@@ -100,7 +115,7 @@ extension DemoDetailViewController {
 
   private func createMaskView(onView: UIView) {
     let blueView = UIView(frame: CGRect.zero)
-    blueView.backgroundColor = .blackColor()
+    blueView.backgroundColor = .whiteColor()
     blueView.translatesAutoresizingMaskIntoConstraints = false
     blueView.alpha = 0.4
     onView.addSubview(blueView)
@@ -118,51 +133,51 @@ extension DemoDetailViewController {
 
 extension DemoDetailViewController {
   
-  private func showBackButtonDuration(duration: Double) {
-    backButton?.rotateDuration(duration, from: CGFloat(-M_PI_4), to: 0)
-    backButton?.scaleDuration(duration, from: 0.5, to: 1)
-    backButton?.opacityDuration(duration, from: 0, to: 1)
-  }
-  
-  private func showControlViewDuration(duration: Double) {
-    moveUpControllerDuration(duration)
-    showControlButtonsDuration(duration)
-    showControlLabelDuration(duration)
-  }
-  
-  private func moveUpControllerDuration(duration: Double) {
-    controlBottomConstrant.constant = -controlHeightConstraint.constant
-    view.layoutIfNeeded()
-    
-    controlBottomConstrant.constant = 0
-    UIView.animateWithDuration(duration, delay: 0, options: .CurveEaseOut, animations: { 
-      self.view.layoutIfNeeded()
-    }, completion: nil)
-  }
-
-  private func showControlButtonsDuration(duration: Double) {
-    [plusImageView, shareImageView, hertIconView].forEach {
-      $0.rotateDuration(duration, from: CGFloat(-M_PI_4), to: 0, delay: duration)
-      $0.scaleDuration(duration, from: 0.5, to: 1, delay: duration)
-      $0.alpha = 0
-      $0.opacityDuration(duration, from: 0, to: 1, delay: duration, remove: false)
-    }
-  }
-
-  private func showControlLabelDuration(duration: Double) {
-    controlTextLabel.alpha = 0
-    controlTextLabel.opacityDuration(duration, from: 0, to: 1, delay: duration, remove: false)
-    
-    // move rigth
-    let offSet: CGFloat = 20
-    controlTextLableLending.constant -= offSet
-    view.layoutIfNeeded()
-    
-    controlTextLableLending.constant += offSet
-    UIView.animateWithDuration(duration * 2, delay: 0, options: .CurveEaseOut, animations: {
-      self.view.layoutIfNeeded()
-    }, completion: nil)
-  }
+//  private func showBackButtonDuration(duration: Double) {
+//    backButton?.rotateDuration(duration, from: CGFloat(-M_PI_4), to: 0)
+//    backButton?.scaleDuration(duration, from: 0.5, to: 1)
+//    backButton?.opacityDuration(duration, from: 0, to: 1)
+//  }
+//  
+//  private func showControlViewDuration(duration: Double) {
+//    moveUpControllerDuration(duration)
+//    showControlButtonsDuration(duration)
+//    showControlLabelDuration(duration)
+//  }
+//  
+//  private func moveUpControllerDuration(duration: Double) {
+//    controlBottomConstrant.constant = -controlHeightConstraint.constant
+//    view.layoutIfNeeded()
+//    
+//    controlBottomConstrant.constant = 0
+//    UIView.animateWithDuration(duration, delay: 0, options: .CurveEaseOut, animations: { 
+//      self.view.layoutIfNeeded()
+//    }, completion: nil)
+//  }
+//
+//  private func showControlButtonsDuration(duration: Double) {
+//    [plusImageView, shareImageView, hertIconView].forEach {
+//      $0.rotateDuration(duration, from: CGFloat(-M_PI_4), to: 0, delay: duration)
+//      $0.scaleDuration(duration, from: 0.5, to: 1, delay: duration)
+//      $0.alpha = 0
+//      $0.opacityDuration(duration, from: 0, to: 1, delay: duration, remove: false)
+//    }
+//  }
+//
+//  private func showControlLabelDuration(duration: Double) {
+//    controlTextLabel.alpha = 0
+//    controlTextLabel.opacityDuration(duration, from: 0, to: 1, delay: duration, remove: false)
+//    
+//    // move rigth
+//    let offSet: CGFloat = 20
+//    controlTextLableLending.constant -= offSet
+//    view.layoutIfNeeded()
+//    
+//    controlTextLableLending.constant += offSet
+//    UIView.animateWithDuration(duration * 2, delay: 0, options: .CurveEaseOut, animations: {
+//      self.view.layoutIfNeeded()
+//    }, completion: nil)
+//  }
 }
 
 // MARK: actions
@@ -170,6 +185,9 @@ extension DemoDetailViewController {
 extension DemoDetailViewController {
   
   func backButtonHandler() {
+//    self.navigationController?.navigationBar.translucent =  false
+//    
+//    self.navigationController?.setNavigationBarHidden(true, animated: true)
     popViewController()
   }
 }

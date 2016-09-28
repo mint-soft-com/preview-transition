@@ -31,6 +31,25 @@ public class DemoTableViewController: PTTableViewController {
 // MARK: UITableViewDelegate
 
 extension DemoTableViewController {
+    
+    public override func viewDidLoad() {
+        self.setTableInset(UIEdgeInsetsMake(0, 0,0,0))
+        super.viewDidLoad()
+        
+        
+        
+       
+    }
+    
+    public override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.redColor()
+        self.navigationController?.navigationBar.translucent =  false
+    }
+
   
   public override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 100
@@ -47,7 +66,7 @@ extension DemoTableViewController {
     let title = items[index].1
     
     if let image = UIImage(named: imageName) {
-      cell.setImage(image, title: title)
+        cell.setImage(image, title: title,titleColor:UIColor.whiteColor())
     }
   }
   
@@ -57,6 +76,7 @@ extension DemoTableViewController {
   }
   
   public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    self.navigationController?.setNavigationBarHidden(true, animated: true)
     let storyboard = UIStoryboard.storyboard(.Main)
     let detaleViewController: DemoDetailViewController = storyboard.instantiateViewController()
     pushViewController(detaleViewController)

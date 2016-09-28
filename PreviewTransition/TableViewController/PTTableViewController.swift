@@ -30,6 +30,8 @@ public class PTTableViewController: UITableViewController {
   
   private var duration: Double = 0.65
   private var currentTextLabel: MovingLabel?
+    
+  private var tableInset:UIEdgeInsets = UIEdgeInsetsMake(-64, 0, 0, 0)
 }
 
 // MARK: public
@@ -42,6 +44,9 @@ public extension PTTableViewController {
    - parameter viewController: The view controller to push onto the stack.
    */
   public func pushViewController(viewController: PTDetailViewController) {
+    
+    self.navigationController?.setNavigationBarHidden(true, animated: true)
+    
     
     guard let currentCell = currentCell,
     let navigationController = self.navigationController else {
@@ -81,7 +86,7 @@ extension PTTableViewController {
   public override func viewDidLoad() {
     super.viewDidLoad()
     
-    tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
+    tableView.contentInset = tableInset
     tableView.separatorStyle = .None
   }
   
@@ -102,7 +107,7 @@ extension PTTableViewController {
   
   private func createTitleLable(cell: ParallaxCell) -> MovingLabel {
     
-    let yPosition = cell.frame.origin.y + cell.frame.size.height / 2.0 - 22 - tableView.contentOffset.y
+    let yPosition = cell.frame.origin.y + cell.frame.size.height / 2.0 - 22 - tableView.contentOffset.y + 44
     let label = MovingLabel(frame: CGRect(x: 0, y: yPosition, width: UIScreen.mainScreen().bounds.size.width, height: 44))
     label.textAlignment = .Center
     label.backgroundColor = .clearColor()
@@ -120,7 +125,7 @@ extension PTTableViewController {
   
   private func createSeparator(color: UIColor?, height: CGFloat, cell: UITableViewCell) -> MovingView {
     
-    let yPosition = cell.frame.origin.y + cell.frame.size.height - tableView.contentOffset.y
+    let yPosition = cell.frame.origin.y + cell.frame.size.height - tableView.contentOffset.y - 44
     let separator = MovingView(frame: CGRect(x:0.0, y: yPosition, width: tableView.bounds.size.width, height: height))
     if let color = color {
       separator.backgroundColor = color
@@ -134,6 +139,10 @@ extension PTTableViewController {
 // MARK: tableView dataSource
 
 extension PTTableViewController {
+    
+    public func setTableInset(inset:UIEdgeInsets){
+        self.tableInset = inset
+    }
   
   final public override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
     

@@ -148,9 +148,10 @@ public extension ParallaxCell {
    - parameter image: The image object which set to the backgroundImageView
    - parameter title: The text to be displayed in the Cell
    */
-  public func setImage(image: UIImage, title: String) {
+    public func setImage(image: UIImage, title: String,titleColor:UIColor) {
     bgImage?.image = image
     parallaxTitle?.text = title
+    parallaxTitle?.textColor = titleColor
   }
 }
 
